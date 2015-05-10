@@ -1,0 +1,47 @@
+<?php echo $this->getButtonHtml() ?>
+<script type="text/javascript">//<![CDATA[
+if (typeof shopgo == 'undefined') {
+    var shopgo = new Object();
+}
+if (typeof shopgo.skynetShipping == 'undefined') {
+    shopgo.skynetShipping = new Object();
+}
+
+shopgo.skynetShipping.verifyAccountButton = {
+    usernameChanged: 0,
+    passwordChanged: 0,
+    elmClassPrefix: 'carriers_skynet_',
+    verifyAccount: function() {
+        var _params = {
+            username: $(this.elmClassPrefix + 'username').value,
+            password: $(this.elmClassPrefix + 'password').value,
+            station_code: $(this.elmClassPrefix + 'station_code').value,
+            consignor_account: $(this.elmClassPrefix + 'consignor_account').value,
+            username_changed: this.usernameChanged,
+            password_changed: this.passwordChanged
+        };
+        new Ajax.Request('<?php echo $this->getAjaxVerifyAccountUrl() ?>', {
+            parameters: _params,
+            onSuccess: function(transport) {
+                if (transport.responseText) {
+                    var response = transport.responseText.evalJSON(true);
+                    alert(response.description);
+                }
+            }
+        });
+    }
+};
+
+document.observe("dom:loaded", function() {
+    $(shopgo.skynetShipping.verifyAccountButton.elmClassPrefix + 'username').observe(
+        'change', function(event) {
+            shopgo.skynetShipping.verifyAccountButton.usernameChanged = 1;
+        }
+    );
+    $(shopgo.skynetShipping.verifyAccountButton.elmClassPrefix + 'password').observe(
+        'change', function(event) {
+            shopgo.skynetShipping.verifyAccountButton.passwordChanged = 1;
+        }
+    );
+});
+//]]></script>

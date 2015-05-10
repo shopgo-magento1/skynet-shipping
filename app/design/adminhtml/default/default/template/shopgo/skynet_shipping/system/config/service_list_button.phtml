@@ -1,0 +1,61 @@
+<?php echo $this->getButtonHtml() ?>
+<script type="text/javascript">//<![CDATA[
+if (typeof shopgo == 'undefined') {
+    var shopgo = new Object();
+}
+if (typeof shopgo.skynetShipping == 'undefined') {
+    shopgo.skynetShipping = new Object();
+}
+
+shopgo.skynetShipping.serviceListButton = {
+    usernameChanged: 0,
+    passwordChanged: 0,
+    elmClassPrefix: 'carriers_skynet_',
+    getList: function() {
+        var _params = {
+            username: $(this.elmClassPrefix + 'username').value,
+            password: $(this.elmClassPrefix + 'password').value,
+            station_code: $(this.elmClassPrefix + 'station_code').value,
+            consignor_account: $(this.elmClassPrefix + 'consignor_account').value,
+            username_changed: this.usernameChanged,
+            password_changed: this.passwordChanged
+        };
+
+        new Ajax.Request('<?php echo $this->getAjaxActionUrl() ?>', {
+            parameters: _params,
+            onSuccess: function(transport) {
+                if (transport.responseText) {
+                    var response = transport.responseText.evalJSON(true);
+
+                    if (response.status) {
+                        var listElm = $(shopgo.skynetShipping.serviceListButton.elmClassPrefix + 'service');
+
+                        listElm.select('option').invoke('remove');
+
+                        response.list.forEach(function(element, index, array) {
+                            listElm.insert(
+                                new Element('option', {value: element.value}).update(element.label)
+                            );
+                        });
+                    }
+
+                    alert(response.description);
+                }
+            }
+        });
+    }
+};
+
+document.observe("dom:loaded", function() {
+    $(shopgo.skynetShipping.serviceListButton.elmClassPrefix + 'username').observe(
+        'change', function(event) {
+            shopgo.skynetShipping.serviceListButton.usernameChanged = 1;
+        }
+    );
+    $(shopgo.skynetShipping.serviceListButton.elmClassPrefix + 'password').observe(
+        'change', function(event) {
+            shopgo.skynetShipping.serviceListButton.passwordChanged = 1;
+        }
+    );
+});
+//]]></script>

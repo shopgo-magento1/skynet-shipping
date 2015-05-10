@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+    <adminhtml_sales_order_shipment_new>
+        <reference name="head">
+            <action method="addCss">
+                ifconfig="carriers/skynet/shipping_service"
+                <name>shopgo/skynet_shipping/sales/order/shipment/create/form/css/main.css</name>
+                <adv_ifconfig>
+                    <required_depends>carriers/skynet/active</required_depends>
+                    <depends_check>1</depends_check>
+                    <custom_rules>
+                        <check_used_method>skynet</check_used_method>
+                    </custom_rules>
+                </adv_ifconfig>
+            </action>
+            <action method="addCss">
+                ifconfig="carriers/skynet/shipping_service"
+                <name>shopgo/skynet_shipping/sales/order/shipment/create/form/css/shipment.css</name>
+                <adv_ifconfig>
+                    <required_depends>carriers/skynet/active</required_depends>
+                    <depends_check>1</depends_check>
+                    <custom_rules>
+                        <check_used_method>skynet</check_used_method>
+                    </custom_rules>
+                </adv_ifconfig>
+            </action>
+        </reference>
+        <reference name="form">
+            <block
+                type="skynetshipping/adminhtml_sales_order_shipment_create_form_shipment"
+                name="skynet_shipment"
+                template="shopgo/skynet_shipping/sales/order/shipment/create/form/shipment.phtml"
+            />
+        </reference>
+    </adminhtml_sales_order_shipment_new>
+</layout>

@@ -1,0 +1,11 @@
+#shopgo_skynet_shipment_container .fieldset.shipment-details table td.label {
+    width: 175px;
+}
+
+#shopgo_skynet_shipment_container .fieldset.shipment-details table td.field input[type="text"] {
+    width: 150px;
+}
+
+#shopgo_skynet_shipment_container .fieldset.shipment-details table td.field select {
+    padding: 0 30px 0 0;
+}

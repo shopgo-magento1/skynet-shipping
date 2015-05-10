@@ -1,0 +1,5 @@
+app/code/community/Shopgo/SkynetShipping/                                 app/code/community/Shopgo/SkynetShipping/
+app/design/adminhtml/default/default/layout/shopgo/skynet_shipping.xml    app/design/adminhtml/default/default/layout/shopgo/skynet_shipping.xml
+app/design/adminhtml/default/default/template/shopgo/skynet_shipping/     app/design/adminhtml/default/default/template/shopgo/skynet_shipping/
+app/etc/modules/Shopgo_SkynetShipping.xml                                 app/etc/modules/Shopgo_SkynetShipping.xml
+skin/adminhtml/default/default/shopgo/skynet_shipping/                    skin/adminhtml/default/default/shopgo/skynet_shipping/

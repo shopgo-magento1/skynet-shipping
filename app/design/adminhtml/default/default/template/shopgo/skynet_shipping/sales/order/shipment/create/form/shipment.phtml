@@ -1,0 +1,48 @@
+<?php if ($this->isEnabled()): ?>
+<?php $formData = $this->getFormData() ?>
+<div class="entry-edit">
+    <div class="entry-edit-head">
+        <h4 class="icon-head head-shopgo-skynet-shipment"><?php echo Mage::helper('sales')->__('SkyNet Shipment Create Form') ?></h4>
+        <div class="clear"></div>
+    </div>
+    <div id="shopgo_skynet_shipment_container" class="shopgo-skynet-container-table">
+        <fieldset>
+            <div class="row">
+                <div><strong><?php echo $this->__('Shipment Details') ?></strong></div>
+                <div class="fieldset shipment-details">
+                    <div class="box-left">
+                        <table id="shopgo_skynet_shipment_details_table_left" cellpadding="0" cellspacing="0">
+                            <tbody>
+                                <tr class="type">
+                                    <td class="label"><?php echo $this->__('Type of Shipment') ?></td>
+                                    <td class="field">
+                                        <select name="shopgo[skynet][shipment][type]">
+                                            <?php $shipmentType = $formData['type_of_shipment'] ?>
+                                            <?php foreach ($this->getShipmentTypeOptions() as $option): ?>
+                                            <option value="<?php echo $option['value'] ?>"<?php if ($shipmentType == $option['value']): ?> selected<?php endif ?>><?php echo $option['label'] ?></option>
+                                            <?php endforeach ?>
+                                        </select>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="box-right">
+                        <table id="shopgo_skynet_shipment_details_table_right" cellpadding="0" cellspacing="0">
+                            <tbody>
+                                <tr class="consignor-ref">
+                                    <td class="label"><?php echo $this->__('Consignor Reference') ?></td>
+                                    <td class="field">
+                                        <input type="text" class="input-text" name="shopgo[skynet][shipment][consignor_ref]" value="<?php echo $this->getFormFieldData('consignor_ref', $formData['consignor_ref']) ?>" />
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="clear"></div>
+                </div>
+            </div>
+        </fieldset>
+    </div>
+</div>
+<?php endif ?>

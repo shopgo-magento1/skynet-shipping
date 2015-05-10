@@ -1,0 +1,19 @@
+{
+    "name": "shopgo/skynet-shipping",
+    "type": "magento-module",
+    "license": [
+        "OSL-3.0",
+        "AFL-3.0"
+    ],
+    "description": "SkyNet Worldwide Express Magento shipping extension",
+    "require": {
+        "magento-hackathon/magento-composer-installer": "*",
+        "shopgo/shipping-core": "dev-master"
+    },
+    "authors":[
+        {
+            "name": "Ammar",
+            "email": "ammar@shopgo.me"
+        }
+    ]
+}
