@@ -363,7 +363,7 @@ class Shopgo_SkynetShipping_Model_Shipment extends Mage_Core_Model_Abstract
         $order = Mage::getModel('sales/order')
             ->load($shipment->getOrder()->getId());
 
-        if (!$this->isShippingEnabled() || !$order->canShip()) {
+        if (!$this->isEnabled() || !$order->canShip()) {
             return;
         }
 
