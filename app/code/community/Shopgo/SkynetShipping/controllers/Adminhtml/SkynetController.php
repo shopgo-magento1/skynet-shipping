@@ -14,17 +14,12 @@ class Shopgo_SkynetShipping_Adminhtml_SkynetController extends Mage_Adminhtml_Co
             'description' => $this->__('An error has occurred. Please, contact the store administrator.')
         );
 
-        if (!isset($params['username_changed']) || !isset($params['password_changed'])) {
-            $result['description'] = $this->__('Bad request');
-            $response->setBody(json_encode($result));
+        $clientInfo = $helper->getOriginSupplier('skynet_account');
 
-            return;
-        }
-
-        foreach ($params as $p) {
-            if (empty($p) && $p != 0) {
+        foreach ($clientInfo as $key => $val) {
+            if (empty($params[$key]) && $params[$key] !== 0) {
                 $result['description'] = $this->__(
-                    'Username, Password, Station Code and Consignor Number are necessary in order to do check your account'
+                    'Username, Password, Station Code and Consignor Account are required in order to verify your account'
                 );
                 $response->setBody(json_encode($result));
 
