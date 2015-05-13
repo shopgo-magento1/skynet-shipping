@@ -26,8 +26,6 @@ abstract class Shopgo_SkynetShipping_Block_Adminhtml_Sales_Order_Shipment_Create
         return Mage::registry('current_shipment');
     }
 
-    protected function getFormFieldData($field, $data = '');
-
     public function getCountryCodeOptions()
     {
         return Mage::getModel('adminhtml/system_config_source_country')->toOptionArray();
