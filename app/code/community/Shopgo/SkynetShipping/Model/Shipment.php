@@ -191,7 +191,7 @@ class Shopgo_SkynetShipping_Model_Shipment extends Mage_Core_Model_Abstract
         $data = array(
             'TOTALWEIGHT' => 0,
             'TOTALLENGTH' => 0,
-            'TOTALWIDTH' => 0,
+            'TOTALWIDTH'  => 0,
             'TOTALHEIGHT' => 0,
             'ITEMNAME' => array(),
             'SKYBILLITEMDESC' => array()
@@ -265,6 +265,8 @@ class Shopgo_SkynetShipping_Model_Shipment extends Mage_Core_Model_Abstract
             $contents = substr($contents, 0, 96) . '...';
         }
 
+        $baseCurrencyCode = Mage::app()->getStore()->getBaseCurrencyCode();
+
         $quote = Mage::getModel('sales/quote')->loadByIdWithoutStore($order->getQuoteId());
 
         $calculatedWeights = $this->calculateRate($quote);
@@ -296,7 +298,7 @@ class Shopgo_SkynetShipping_Model_Shipment extends Mage_Core_Model_Abstract
                 'CONSIGNORZIPCODE' => $consignorData['zipcode'],
 
                 'CONSIGNEE' => $consigneeName,
-                'CONSIGNEEADDRESS' => preg_replace("/\r\n|\n|\r/", ' ', $consigneeData['street']),
+                'CONSIGNEEADDRESS' => $helper->getSingleLineStreetAddress($consigneeData['street']),
                 'CONSIGNEECOUNTRY' => $consigneeData['country_id'],
                 'CONSIGNEEEMAILADDRESS' => $consigneeData['email'],
                 'CONSIGNEETOWN' => $consigneeData['city'],
@@ -313,9 +315,9 @@ class Shopgo_SkynetShipping_Model_Shipment extends Mage_Core_Model_Abstract
                 'PIECES' => 1, // In our case, we will only have 1 SKYBILLITEM.
                 'TOTALWEIGHT' => $shipmentItemsData['TOTALWEIGHT'],
                 'VALUEAMT' => $valueAmount,
-                'CURRENCY' => Mage::app()->getStore()->getBaseCurrencyCode(),
+                'CURRENCY' => $baseCurrencyCode,
                 'CODAMOUNT' => $codAmount,
-                'CODCURRENCY' => Mage::app()->getStore()->getBaseCurrencyCode(),
+                'CODCURRENCY' => $baseCurrencyCode,
                 'DESTINATIONCODE' => '',
                 'ORIGINSTATION' => $accountInfo['StationCode'],
 
@@ -363,11 +365,9 @@ class Shopgo_SkynetShipping_Model_Shipment extends Mage_Core_Model_Abstract
         $order = Mage::getModel('sales/order')
             ->load($shipment->getOrder()->getId());
 
-        if (!$this->isEnabled() || !$order->canShip()) {
-            return;
+        if ($this->isEnabled() && $order->canShip()) {
+            $result = $this->_createShipment($shipment, $additionalData);
         }
-
-        $result = $this->_createShipment($shipment, $additionalData);
 
         return $result;
     }
