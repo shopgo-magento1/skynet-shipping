@@ -278,7 +278,11 @@ class Shopgo_SkynetShipping_Model_Shipment extends Mage_Core_Model_Abstract
 
         if ($helper->getConfigData('cod', 'carriers_skynet')
             && in_array($order->getPayment()->getMethodInstance()->getCode(), $codMethods)) {
-            $codAmount = round($order->getBaseGrandTotal(), 2);
+            $codCurrency = $helper->getCodCurrency();
+            $codAmount = $helper->currencyConvert(
+                $order->getBaseGrandTotal(), $baseCurrencyCode,
+                $codCurrency, 'price', 2
+            );
         }
 
         $data = array(
@@ -317,7 +321,7 @@ class Shopgo_SkynetShipping_Model_Shipment extends Mage_Core_Model_Abstract
                 'VALUEAMT' => $valueAmount,
                 'CURRENCY' => $baseCurrencyCode,
                 'CODAMOUNT' => $codAmount,
-                'CODCURRENCY' => $baseCurrencyCode,
+                'CODCURRENCY' => $codCurrency,
                 'DESTINATIONCODE' => '',
                 'ORIGINSTATION' => $accountInfo['StationCode'],
 

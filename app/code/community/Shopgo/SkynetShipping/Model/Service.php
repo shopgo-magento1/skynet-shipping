@@ -74,10 +74,12 @@ class Shopgo_SkynetShipping_Model_Service extends Mage_Core_Model_Abstract
     {
         Mage::getResourceModel('skynetshipping/service')->truncate();
 
+        $model = Mage::getModel('skynetshipping/service');
+
         foreach ($data as $i) {
-            Mage::getModel('skynetshipping/service')
-                ->setService($i)
-                ->save();
+            $model->setService($i);
         }
+
+        $model->save();
     }
 }

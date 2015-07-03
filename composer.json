@@ -8,7 +8,7 @@
     "description": "SkyNet Worldwide Express Magento shipping extension",
     "require": {
         "magento-hackathon/magento-composer-installer": "*",
-        "shopgo/shipping-core": "dev-master"
+        "shopgo/shipping-core": "*"
     },
     "authors":[
         {
