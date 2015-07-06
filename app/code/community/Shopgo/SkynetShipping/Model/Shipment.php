@@ -278,7 +278,7 @@ class Shopgo_SkynetShipping_Model_Shipment extends Mage_Core_Model_Abstract
 
         if ($helper->getConfigData('cod', 'carriers_skynet')
             && in_array($order->getPayment()->getMethodInstance()->getCode(), $codMethods)) {
-            $codCurrency = $helper->getCodCurrency();
+            $codCurrency = $helper->getCodCurrency($order);
             $codAmount = $helper->currencyConvert(
                 $order->getBaseGrandTotal(), $baseCurrencyCode,
                 $codCurrency, 'price', 2
