@@ -3,7 +3,7 @@
 ### About Repository ###
 
 * SkyNet Worldwide Express Magento Shipping extension.
-* v1.0.6
+* v1.0.7
 
 ### Author ###
 

@@ -2,8 +2,7 @@
 <layout version="0.1.0">
     <adminhtml_sales_order_shipment_new>
         <reference name="head">
-            <action method="addCss">
-                ifconfig="carriers/skynet/shipping_service"
+            <action method="addCss" ifconfig="carriers/skynet/shipping_service">
                 <name>shopgo/skynet_shipping/sales/order/shipment/create/form/css/main.css</name>
                 <adv_ifconfig>
                     <required_depends>carriers/skynet/active</required_depends>
@@ -13,8 +12,7 @@
                     </custom_rules>
                 </adv_ifconfig>
             </action>
-            <action method="addCss">
-                ifconfig="carriers/skynet/shipping_service"
+            <action method="addCss" ifconfig="carriers/skynet/shipping_service">
                 <name>shopgo/skynet_shipping/sales/order/shipment/create/form/css/shipment.css</name>
                 <adv_ifconfig>
                     <required_depends>carriers/skynet/active</required_depends>
